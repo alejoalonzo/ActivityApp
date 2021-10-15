@@ -1,0 +1,72 @@
+body {
+  background-image: url(../img/background.jfif);
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* para pantallas moviles */
+  background-attachment: fixed;
+}
+#infoActividad {
+  display: none;
+}
+/* formulario -----------------------------------------------*/
+.formulario {
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-bottom: 50px;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 25px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.568);
+  color: #fff;
+  transition: 0.3s ease-in;
+}
+.form-control {
+  background: rgba(0, 0, 0, 0.2);
+  border-style: none;
+  transition: 0.3s ease-in;
+  box-shadow: none;
+  outline: none;
+  color: #fff;
+}
+.form-control:focus {
+  background: #fff;
+  box-shadow: none;
+  outline: none;
+}
+.form-control::placeholder {
+  color: #fff;
+}
+select option {
+  padding-top: 5px;
+  box-shadow: none;
+  outline: none;
+  border-style: none;
+}
+#tipo {
+  color: #fff;
+  padding-left: 14px;
+  padding-bottom: 5px;
+}
+input,
+select {
+  cursor: pointer;
+}
+.ingresar {
+  background: #5b789b;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  transition: 0.3s ease-in;
+}
+.ingresar:hover {
+  background: #ffff;
+  color: #5b789b;
+}
+
+/* imagenes ----------------------------------*/
+.fit-image {
+  width: 100%;
+  object-fit: cover;
+  height: 260px; /*only if you want fixed height  */
+  border-radius: 10px;
+}
