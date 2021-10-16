@@ -56,13 +56,13 @@
               <h1 class="text-light">ACTIVIDADES</h1>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" name="titulo" placeholder="Titulo" />
+              <input type="text" class="form-control" name="titulo" placeholder="Titulo" required/>
             </div>
             <div class="form-group">
-              <input type="date" class="form-control" name= "fecha" placeholder="Fecha" />
+              <input type="date" class="form-control" name= "fecha" placeholder="Fecha" required/>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" name="ciudad" placeholder="Ciudad" />
+              <input type="text" class="form-control" name="ciudad" placeholder="Ciudad" required/>
             </div> 
             <div class="form-group">
               <div id="tipo">Tipo</div>
@@ -74,16 +74,23 @@
               </select>
             </div>
             <div class="form-group">
-              <input type="radio" name= "gratis"> Acceso publico y gratuito
+              <input type="radio" name= "gratis"> Es gratuito
             </div>
             <div class="form-group pb-4 pt-5">
               <input 
                 type="submit"
                 class="btn btn-block ingresar"
                 value="Crear actividad"
-                name="crearActividad"
-                onclick=mostrarActividad();
+                name="crearActividad" 
               />
+              <?php
+              if(isset($_POST['crearActividad']) && $_POST['tipo']!=""){//Otro condicional para mostrar llamar al JS que muestra la el div contenedor. 
+                //Las fuciones de JS se pueden llamar asi
+                echo "<script>";
+                echo "mostrarActividad();";
+                echo "</script>";
+              }
+              ?>
             </div>
           </form>
         </div>
