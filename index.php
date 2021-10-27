@@ -1,3 +1,38 @@
+<!-- dev: Alejandro, github: @alonzoalejo -->
+
+
+<!-- -----------------------------------------SESSION--------------------------------------------------------------------------------------- -->
+
+<?php require "actividad.php";?>
+<?php 
+  session_start();//Inicializar la session siempre.
+
+  //La cookie  guarda los datos aunque se cierre el navegador, solo con el logout se puede salir y la SESSION los guarda en el el server
+  if(isset($_COOKIE["ifpUser"])){
+    $_SESSION["usuario"] = $_COOKIE["ifpUser"];
+  }else{
+    header("Location: login.php");
+    exit();
+  }
+
+  if(!isset($_SESSION["usuario"])){//si no existe dentro de la session el valor login, que me mande al login
+    header("Location: login.php");
+    exit();
+  }
+
+  if(!isset($_SESSION["actividades"])){//si no existe dentro de la session el valor actividaddes, que lo cree
+    $_SESSION["actividades"] = array();
+  }
+  if (isset($_POST["crearActividad"])){//Lo mismo de antes solo que ahora iremos guardando las act en el objeto nuevaActividad
+    $nuevaActividad = new Actividad($_POST['titulo'], $_POST['fecha'], $_POST['ciudad'], $_POST['tipo']);//mando estos parametros al constructor
+    $actividadSerializada = serialize($nuevaActividad);//Se tiene que guardar SERIALIZADO el dato si lo queremos guardar en un array de SESSION
+    array_push( $_SESSION["actividades"],$actividadSerializada );
+  };
+?>
+<!-- -------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -11,10 +46,25 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="css/styles.css" />
-    <script src="./scripts.js"></script>
-    <title>Document</title>
+    <script src="scrps/scripts.js"></script>
+    <!-- iconos de fontAwesome -->
+    <script src="https://kit.fontawesome.com/09fe00cf62.js" crossorigin="anonymous"></script>
+    <title>Activity App</title>
   </head>
   <body>
+    <!-- MENSAJE DE BIENVENIDA ------------------------------------------------------------------------------------------------>
+    <div class="container">
+      <div class="row pt-2 mt-2 mb-2">
+        <div class="col">
+        </div>
+        <div class="col-md-auto">
+        </div>
+        <div class="col col-lg-12">
+          <h1 class="display-4">Hola, <?php echo  $_SESSION["usuario"]?></h1>
+        </div>
+      </div>
+    </div>  
+    
     <div class="container">
       <div class="row justify-content-center cen pt-5 mt-5">
         <!-- IMAGENES ---------------------------------------------------------------------------------------------------------->
@@ -22,34 +72,31 @@
           <div class="form-group text-center pb-2">
             <h1 class="text-light">Tu actividad</h1>
             <div class="col-md-12 imgs">
-
+            
               <?php
-                if(isset($_POST['crearActividad']) && $_POST['tipo']!=""){// Comprobamos que la variable que recibimos de 'TIPO' este defida  o no este vacia.
-                
-                    $imageName = strtolower($_POST['tipo']) . '.jpg';//Convertir a minusculas, el valor de 'Tipo' se lo sumamos a 'jpg' y lo guardamos en la variable imageName
-                    echo"<img class=\"fit-image\" src= \"../backendProject/img/" . $imageName ."\"/>";//construimos la ruta con el valor que se inttroduce. 
-                };
-              ?>
-              <?php
-                if(isset($_POST['crearActividad']) && $_POST['tipo']!=""){
+                foreach($_SESSION["actividades"] as $actividadSerializada):// iteramos para guardar en el array y hay que deserealizar.
+                  $actividad = unserialize($actividadSerializada);?>
+                  <div>
+                    <!-- En  cada iteracion llamo a la imagen con el objeto.atributo ==> $actividad.tipo -->
+                    <!-- Importante, no debe haber espacios entre el SRC y el php en mmedio sino se rompe el link -->
+                    
+                    <img class="fit-image" src= "../backendProject/img/<?php echo $actividad->tipo; ?>.jpg" />
+                  </div>
+                  <div>
+                      <!-- y tambien imprimo toda la información de la misma manera con el get y el objeto -->
+                      <?php echo  "<br><br>"?>
+                      <?php echo "<b>Que --> </b>" . $actividad->titulo."<br>"?>
+                      <?php echo "<b>Cuando --> </b>" . $actividad->fecha."<br>"?>
+                      <?php echo "<b>Cuando --> </b>" . $actividad->ciudad."<br>"?>
+                      <?php echo  "<br><br>"?>
+                  </div>
+              <?php endforeach; ?>
 
-                  // Los valores los regoge del formulario del atributo 'name'
-                  $titulo=$_POST['titulo'];
-                  $fecha=$_POST['fecha'];
-                  $ciudad=$_POST['ciudad'];
-                  $tipo=$_POST['tipo'];
-
-                  echo "<br><br>";
-                  echo "<b>Que --> </b>" . $titulo."<br>";
-                  echo "<b>Cuando --> </b>" . $fecha."<br>";
-                  echo "<b>Donde --> </b>" . $ciudad;
-                };
-              ?>
             </div>
           </div>
         </div>
         <!-- FORMULARIO ------------------------------------------------------------------------------------------------------>
-        <div class="col-md-4 formulario">
+        <div  id="claseVariable" class="col-md-4 soloFormulario">
           <!-- le decimos que se mantenga en la mismma pagina, que el post lo recoja de la mismma pag -->
           <form role="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             <div class="form-group text-center pb-2">
@@ -93,9 +140,16 @@
               ?>
             </div>
           </form>
-        </div>
+        </div> 
       </div>
-    </div>
+      <div class="row justify-content-center cen pt-5 mt-5 mb-5">
+        <button type="button" class="btn btn-light">
+          <a href="logout.php" >
+            <i class="fas fa-sign-out-alt"></i>
+          </a></button>
+      </div>
+    </div> 
+    
 
     <!-- Bootstrap----------------------------------------------------------------------------------------------------- -->
     <script

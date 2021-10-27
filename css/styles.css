@@ -8,7 +8,9 @@ body {
 #infoActividad {
   display: none;
 }
+
 /* formulario -----------------------------------------------*/
+
 .formulario {
   margin-left: 50px;
   margin-right: 50px;
@@ -19,6 +21,18 @@ body {
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.568);
   color: #fff;
   transition: 0.3s ease-in;
+}
+.soloFormulario {
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-bottom: 50px;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 25px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.568);
+  color: #fff;
+  transition: 0.3s ease-in;
+  max-height: 550px;
 }
 .form-control {
   background: rgba(0, 0, 0, 0.2);
@@ -67,6 +81,14 @@ select {
 .fit-image {
   width: 100%;
   object-fit: cover;
-  height: 260px; /*only if you want fixed height  */
+  height: 260px; /*solo si quiero fixed height  */
   border-radius: 10px;
+}
+
+/* ------------------------------------------- */
+a {
+  color: #5b789b !important;
+}
+h1 {
+  color: #fff !important;
 }
