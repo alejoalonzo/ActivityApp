@@ -7,8 +7,8 @@
             $nombreUsuario = $_POST["user"];
             $_SESSION["usuario"] = $nombreUsuario;
 
-            //Asignar cookie, le paso un nombre y el usuarioy tambn tiempo (1h)
-            setcookie("ifpUser", $nombreUsuario, time()+30);
+            //Asignar cookie, le paso un nombre y el usuario y tambn tiempo (300s) corto para ir probando 
+            setcookie("ifpUser", $nombreUsuario, time()+300);
             header("Location: index.php");//Y lo mandamos al index
             exit();
         }else{

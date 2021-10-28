@@ -10,14 +10,12 @@
   //La cookie  guarda los datos aunque se cierre el navegador, solo con el logout se puede salir y la SESSION los guarda en el el server
   if(isset($_COOKIE["ifpUser"])){
     $_SESSION["usuario"] = $_COOKIE["ifpUser"];
-  }else{
-    header("Location: login.php");
-    exit();
+    //prueba-->echo "Entro en el if de la cookie";
   }
-
+  
   if(!isset($_SESSION["usuario"])){//si no existe dentro de la session el valor login, que me mande al login
-    header("Location: login.php");
-    exit();
+      header("Location: login.php");
+      exit();
   }
 
   if(!isset($_SESSION["actividades"])){//si no existe dentro de la session el valor actividaddes, que lo cree
