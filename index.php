@@ -49,6 +49,8 @@
     <script src="https://kit.fontawesome.com/09fe00cf62.js" crossorigin="anonymous"></script>
     <title>Activity App</title>
   </head>
+
+
   <body>
     <!-- MENSAJE DE BIENVENIDA ------------------------------------------------------------------------------------------------>
     <div class="container">
@@ -62,6 +64,8 @@
         </div>
       </div>
     </div>  
+    <!------------------------------------------------------------------------------------------------------------------------>
+
     
     <div class="container">
       <div class="row justify-content-center cen pt-5 mt-5">
@@ -78,14 +82,14 @@
                     <!-- En  cada iteracion llamo a la imagen con el objeto.atributo ==> $actividad.tipo -->
                     <!-- Importante, no debe haber espacios entre el SRC y el php en mmedio sino se rompe el link -->
                     
-                    <img class="fit-image" src= "../backendProject/img/<?php echo $actividad->tipo; ?>.jpg" />
+                    <img class="fit-image" src= "img/<?php echo $actividad->tipo; ?>.jpg" />
                   </div>
                   <div>
                       <!-- y tambien imprimo toda la información de la misma manera con el get y el objeto -->
                       <?php echo  "<br><br>"?>
                       <?php echo "<b>Que --> </b>" . $actividad->titulo."<br>"?>
                       <?php echo "<b>Cuando --> </b>" . $actividad->fecha."<br>"?>
-                      <?php echo "<b>Cuando --> </b>" . $actividad->ciudad."<br>"?>
+                      <?php echo "<b>Donde --> </b>" . $actividad->ciudad."<br>"?>
                       <?php echo  "<br><br>"?>
                   </div>
               <?php endforeach; ?>
@@ -140,6 +144,8 @@
           </form>
         </div> 
       </div>
+
+      <!-- LOGOUT ------------------------------------------------------------------------------------------------------>
       <div class="row justify-content-center cen pt-5 mt-5 mb-5">
         <button type="button" class="btn btn-light">
           <a href="logout.php" >
