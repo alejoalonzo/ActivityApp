@@ -42,7 +42,7 @@
     }
 
     //Ejemplo para actializar (UPDATE)----------------------------------------------------------------------------
-    function actualizarUsuarios ($id, $contrasena, $correo, $nombre){//Debe corresponder con los campos de la BBDD
+    function actualizarUsuarios($id, $contrasena, $correo, $nombre){//Debe corresponder con los campos de la BBDD
         global $conexion;
         $consulta = "UPDATE usuarios
                     SET contrasena = '$contrasena', 
@@ -61,7 +61,7 @@
     }
 
       //Ejemplo para borrar (DELETE)----------------------------------------------------------------------------
-    function borrarUsuarios ($id){//Solo necesito el id
+    function borrarUsuarios($id){//Solo necesito el id
         global $conexion;
         $consulta = "DELETE FROM usuarios
                     WHERE id = '$id'

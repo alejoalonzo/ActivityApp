@@ -14,6 +14,9 @@
         }else{
             $errorLogin= "";
         }
+    }else if(isset($_POST["registro"])){
+        header("Location: registro.php");//Y lo mandamos al registro
+        exit();
     }    
 ?>
 <html lang="es">
@@ -48,12 +51,20 @@
                         <div class="form-group">
                             <input type="password" id="inputPassword" class="form-control" name= "password" placeholder="Contraseña"/>
                         </div>
-                        <div class="form-group pb-4 pt-5">
+                        <div class="form-group pb-0 pt-4">
                             <input 
                             type="submit"
                             class="btn btn-block ingresar"
                             value="Entrar"
                             name="login" 
+                            />
+                        </div>
+                        <div class="form-group pb-3 pt-1">
+                            <input 
+                            type="submit"
+                            class="btn btn-block ingresar"
+                            value="Registrar"
+                            name="registro" 
                             />
                         </div>
                     </form>

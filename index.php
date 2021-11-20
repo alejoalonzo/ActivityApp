@@ -2,30 +2,13 @@
 
 
 <!-- -----------------------------------------SESSION--------------------------------------------------------------------------------------- -->
+<?php require "controladores/controladorUsuarios.php";?>
+<?php require "controladores/controladorActividad.php";?>
 
-<?php require "actividad.php";?>
 <?php 
   session_start();//Inicializar la session siempre.
-
-  //La cookie  guarda los datos aunque se cierre el navegador, solo con el logout se puede salir y la SESSION los guarda en el el server
-  if(isset($_COOKIE["ifpUser"])){
-    $_SESSION["usuario"] = $_COOKIE["ifpUser"];
-    //prueba-->echo "Entro en el if de la cookie";
-  }
-  
-  if(!isset($_SESSION["usuario"])){//si no existe dentro de la session el valor login, que me mande al login
-      header("Location: login.php");
-      exit();
-  }
-
-  if(!isset($_SESSION["actividades"])){//si no existe dentro de la session el valor actividaddes, que lo cree
-    $_SESSION["actividades"] = array();
-  }
-  if (isset($_POST["crearActividad"])){//Lo mismo de antes solo que ahora iremos guardando las act en el objeto nuevaActividad
-    $nuevaActividad = new Actividad($_POST['titulo'], $_POST['fecha'], $_POST['ciudad'], $_POST['tipo']);//mando estos parametros al constructor
-    $actividadSerializada = serialize($nuevaActividad);//Se tiene que guardar SERIALIZADO el dato si lo queremos guardar en un array de SESSION
-    array_push( $_SESSION["actividades"],$actividadSerializada );
-  };
+  comprobarLogin();
+  comprobarActividad();
 ?>
 <!-- -------------------------------------------------------------------------------------------------------------------------------------- -->
 
@@ -75,29 +58,30 @@
             <h1 class="text-light">Tu actividad</h1>
             <div class="col-md-12 imgs">
             
-              <?php
-                foreach($_SESSION["actividades"] as $actividadSerializada):// iteramos para guardar en el array y hay que deserealizar.
-                  $actividad = unserialize($actividadSerializada);?>
-                  <div>
+            <?php
+              foreach($_SESSION["actividades"] as $actividadSerializada):// iteramos para guardar en el array y hay que deserealizar.
+                $actividad = unserialize($actividadSerializada);?>
+                <div>
                     <!-- En  cada iteracion llamo a la imagen con el objeto.atributo ==> $actividad.tipo -->
                     <!-- Importante, no debe haber espacios entre el SRC y el php en mmedio sino se rompe el link -->
-                    
+                            
                     <img class="fit-image" src= "img/<?php echo $actividad->tipo; ?>.jpg" />
-                  </div>
-                  <div>
-                      <!-- y tambien imprimo toda la información de la misma manera con el get y el objeto -->
-                      <?php echo  "<br><br>"?>
-                      <?php echo "<b>Que --> </b>" . $actividad->titulo."<br>"?>
-                      <?php echo "<b>Cuando --> </b>" . $actividad->fecha."<br>"?>
-                      <?php echo "<b>Donde --> </b>" . $actividad->ciudad."<br>"?>
-                      <?php echo  "<br><br>"?>
-                  </div>
+                </div>
+                <div>
+                    <!-- y tambien imprimo toda la información de la misma manera con el get y el objeto -->
+                    <?php echo  "<br><br>"?>
+                    <?php echo "<b>Que --> </b>" . $actividad->titulo."<br>"?>
+                    <?php echo "<b>Cuando --> </b>" . $actividad->fecha."<br>"?>
+                    <?php echo "<b>Donde --> </b>" . $actividad->ciudad."<br>"?>
+                    <?php echo  "<br><br>"?>
+                </div>
               <?php endforeach; ?>
 
             </div>
           </div>
         </div>
         <!-- FORMULARIO ------------------------------------------------------------------------------------------------------>
+
         <div  id="claseVariable" class="col-md-4 soloFormulario">
           <!-- le decimos que se mantenga en la mismma pagina, que el post lo recoja de la mismma pag -->
           <form role="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
@@ -133,7 +117,8 @@
                 name="crearActividad" 
               />
               <?php
-              if(isset($_POST['crearActividad']) && $_POST['tipo']!=""){//Otro condicional para mostrar llamar al JS que muestra la el div contenedor. 
+              //Otro condicional para mostrar llamar al JS que muestra la el div contenedor.
+              if(isset($_POST['crearActividad']) && $_POST['tipo']!=""){ 
                 //Las fuciones de JS se pueden llamar asi
                 echo "<script>";
                 echo "mostrarActividad();";

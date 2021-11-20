@@ -1,24 +1,22 @@
-function mostrarActividad(){
-    document.getElementById("infoActividad").style.display="block";  
-    
-    // ademas de mostrar actividad, le cambio el fondo al formulario
-    // var elemento = document.getElementById("claseVariable");
-    // if (elemento.className == "formulario") {
-    //     elemento.className == "soloFormulario";
-    // }
-};
+function mostrarActividad() {
+  document.getElementById("infoActividad").style.display = "block";
 
-function contrasenaIncorrecta(){
-    Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'El usuario o la contraseña son incorrectos',
-        footer: '<a href="https://support.google.com/chrome/answer/95606?hl=es&co=GENIE.Platform%3DDesktop">¿Por que tengo este problema?</a>'
-    })
+  // ademas de mostrar actividad, le cambio el fondo al formulario
+  // var elemento = document.getElementById("claseVariable");
+  // if (elemento.className == "formulario") {
+  //     elemento.className == "soloFormulario";
+  // }
 }
 
-
-
+function contrasenaIncorrecta() {
+  Swal.fire({
+    confirmButtonColor: "#5b789b",
+    icon: "error",
+    title: "Oops...",
+    text: "El usuario o la contraseña son incorrectos",
+    footer: '<a href="./registro.php">No estoy registrado</a>',
+  });
+}
 
 //********************* NOTAS ************************************************** */
 

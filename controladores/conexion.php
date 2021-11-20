@@ -1,5 +1,7 @@
 <?php
+    require "registro.php"
     require "functionsCRUD.php";
+    session_start();
     //Conexion---------------------------------------------------------------------------------------------
     $server = "localhost";
     $userDB = "root";
@@ -12,6 +14,30 @@
         echo  "Error en la conexion con la base de datos";
     }
     //-----------------------------------------------------------------------------------------------------
+
+    //Crear usuario---------------------------------------------------------------------------------------------
+    
+    if(isset($_POST['registrar'])){
+        $id = $_POST["user"];
+        $nombre = $_POST["name"];
+        $email = $_POST["email"];
+        $password =  $_POST["password"];
+    }
+
+    $resultadoInsertar = crearUsuarios($id, $password, $email, $nombre);
+    if($resultadoInsertar){
+        echo "Usuario creado <br>";
+    }else{
+        echo "Error, no se ha podido crear usuario <br>";
+    }
+
+
+
+
+
+
+
+
 
     //ejemplos CRUD-------------------------------
     /*
@@ -32,13 +58,13 @@
     }else{
         echo "Error, no se ha podido actualizar usuario <br>";
     }
-    */
+    
     $resultadoBorrar = borrarUsuarios('Juan');
     if($resultadoBorrar){
         echo "Usuario eliminado <br>";
     }else{
         echo "Error, no se ha podido borrar el  usuario <br>";
     }
-
+*/
 
 ?>
