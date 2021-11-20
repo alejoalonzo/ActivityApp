@@ -1,17 +1,14 @@
-
 <?php //require "controladores/conexion.php";?>
-
 <?php
-    // session_start();
-    // if(isset($_COOKIE["ifpUser"])){
-    //     $_SESSION["usuario"] = $_COOKIE["ifpUser"];
-    //     //prueba-->echo "Entro en el if de la cookie";
-    //     header("Location: index.php");
-    //     exit();
-    // }
+    //session_start();
+    if(isset($_COOKIE["ifpUser"])){
+        $_SESSION["usuario"] = $_COOKIE["ifpUser"];
+        //prueba-->echo "Entro en el if de la cookie";
+        header("Location: index.php");
+        exit();
+    }
 ?>
-
-
+<!DOCTYPE html>
 <html lang="es">
     <head>
         <meta charset="UTF-8">

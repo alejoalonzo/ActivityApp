@@ -1,11 +1,7 @@
-<!-- dev: Alejandro, github: @alonzoalejo -->
-
-
-<!-- -----------------------------------------SESSION--------------------------------------------------------------------------------------- -->
 <?php //require "controladores/actividad.php";?>
 <?php require "controladores/controladorUsuarios.php";?>
 <?php require "controladores/controladorActividad.php";?>
-
+<!-- -----------------------------------------SESSION--------------------------------------------------------------------------------------- -->
 <?php 
   session_start();//Inicializar la session siempre.
   comprobarLogin();

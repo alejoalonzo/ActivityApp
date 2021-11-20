@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php
     require "controladores/controladorUsuarios.php";
 
@@ -12,11 +11,14 @@
         }else{
             $errorLogin= "";
         }
-    }else if(isset($_POST["registro"])){
+    }
+    if(isset($_POST["registro"])){
         header("Location: registro.php");//Y lo mandamos al registro
         exit();
+        echo 'Holaaaaa';
     }    
 ?>
+<!DOCTYPE html>
 <html lang="es">
     <head>
         <meta charset="UTF-8">

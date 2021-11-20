@@ -1,7 +1,8 @@
 <?php
+require "conexion.php";
     function comprobarLogin(){
         //La cookie  guarda los datos aunque se cierre el navegador, solo con el logout se puede salir y la SESSION los guarda en el el server
-        if(isset($_COOKIE["ifpUser"])){
+        if(isset($_COOKIE["ifpUser"]) && !isset($_SESSION["usuario"])){
             $_SESSION["usuario"] = $_COOKIE["ifpUser"];
             //prueba-->echo "Entro en el if de la cookie";
         }
@@ -12,8 +13,23 @@
     }
 
     function obtenerUsuario($nombreUsuario, $contrasenaUsuario){
-        if($nombreUsuario == "ifp" && $contrasenaUsuario == "2021"){
-            return $nombreUsuario;
+
+        global $conexion;
+
+        //Es menos bulnerable obtener los datos con los '?'
+        $consulta = "SELECT id, nombre, correo
+                    FROM usuarios
+                    WHERE nombre = ? AND contrasena =?
+                    ";
+        //Este codigo traduce la consulta a 
+        $stmt = $conexion->prepare($consulta);
+        $stmt->bind_param('ss', $nombreUsuario, $contrasenaUsuario);//vinculacion(bind), 'ss' se refiere a un string y otro string
+        $stmt->execute();//ejejucar
+        $resultado = $stmt->get_result();//obtener resultado
+
+        if($resultado){//arreglo asociativo
+            $usuario_db = mysqli_fetch_assoc($resultado);
+            return $usuario_db;
         }
     }
 

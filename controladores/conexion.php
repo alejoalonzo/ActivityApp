@@ -1,7 +1,6 @@
 <?php
-    require "registro.php";
     require "functionsCRUD.php";
-    session_start();
+    
     //Conexion---------------------------------------------------------------------------------------------
     $server = "localhost";
     $userDB = "root";
@@ -18,11 +17,11 @@
     //Crear usuario---------------------------------------------------------------------------------------------
     
     if(isset($_POST['registrar'])){
-        echo "entra";
-        // $id = $_POST["user"];
-        // $nombre = $_POST["name"];
-        // $email = $_POST["email"];
-        // $password =  $_POST["password"];
+        //echo "entra";
+        $id = $_POST["user"];
+        $nombre = $_POST["name"];
+        $email = $_POST["email"];
+        $password =  $_POST["password"];
     }
 
     // $resultadoInsertar = crearUsuarios($id, $password, $email, $nombre);
