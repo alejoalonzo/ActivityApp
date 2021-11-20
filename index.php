@@ -2,6 +2,7 @@
 
 
 <!-- -----------------------------------------SESSION--------------------------------------------------------------------------------------- -->
+<?php //require "controladores/actividad.php";?>
 <?php require "controladores/controladorUsuarios.php";?>
 <?php require "controladores/controladorActividad.php";?>
 
@@ -59,7 +60,8 @@
             <div class="col-md-12 imgs">
             
             <?php
-              foreach($_SESSION["actividades"] as $actividadSerializada):// iteramos para guardar en el array y hay que deserealizar.
+              $activities = listarActividades();
+              foreach($activities as $actividadSerializada):// iteramos para guardar en el array y hay que deserealizar.
                 $actividad = unserialize($actividadSerializada);?>
                 <div>
                     <!-- En  cada iteracion llamo a la imagen con el objeto.atributo ==> $actividad.tipo -->

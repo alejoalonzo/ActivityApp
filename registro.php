@@ -1,8 +1,14 @@
-<?php require "controladores/controladorUsuarios.php";?>
+
+<?php //require "controladores/conexion.php";?>
 
 <?php
-    session_start();
-    comprobarRegistro();
+    // session_start();
+    // if(isset($_COOKIE["ifpUser"])){
+    //     $_SESSION["usuario"] = $_COOKIE["ifpUser"];
+    //     //prueba-->echo "Entro en el if de la cookie";
+    //     header("Location: index.php");
+    //     exit();
+    // }
 ?>
 
 
@@ -26,9 +32,9 @@
         <div class="container">
             <div class="row justify-content-center cen pt-5 mt-5">
                 <!-- LOGIN ------------------------------------------------------------------------------------------------------>
-                <div  id="claseVariable" class="col-md-4 soloFormulario">
+                <div  id="#" class="col-md-4 soloFormulario">
                     <!-- le decimos que se mantenga en la mismma pagina, que el post lo recoja de la mismma pag -->
-                    <form role="form" method="post" action="conexion.php">
+                    <form role="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                         <div class="form-group text-center pb-2">
                             <h1 class="text-light">Registro</h1>
                         </div>

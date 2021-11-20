@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <?php
+    require "controladores/controladorUsuarios.php";
+
     session_start();//Siempre iniciar la session
     if(isset($_POST["login"])){//si le da al boton de entrar...
-        if($_POST["user"] == "ifp" && $_POST["password"] == "2021"){
-            //Si el usuario y contraseña es correcto, la sseion del index va a tener un valor y no lo va a mandar al login
-            $nombreUsuario = $_POST["user"];
-            $_SESSION["usuario"] = $nombreUsuario;
 
-            //Asignar cookie, le paso un nombre y el usuario y tambn tiempo (300s) corto para ir probando 
-            setcookie("ifpUser", $nombreUsuario, time()+300);
-            header("Location: index.php");//Y lo mandamos al index
-            exit();
+        $obtenerUser = obtenerUsuario($_POST["user"], $_POST["password"]);
+
+        if($obtenerUser){
+            hacerLogin();
         }else{
             $errorLogin= "";
         }
