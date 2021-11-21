@@ -17,7 +17,15 @@ function contrasenaIncorrecta() {
     footer: '<a href="./registro.php">No estoy registrado</a>',
   });
 }
+function cambiarFondoRegistro() {
+  document.getElementById("registroBody").style.backgroundImage =
+    "url(./img/loginBGr.png)";
+}
 
+function cambiarFondoLogin() {
+  document.getElementById("loginBody").style.backgroundImage =
+    "url(./img/registroBG.jpg)";
+}
 //********************* NOTAS ************************************************** */
 
 // <!-- VERSION ALTERNATIVA. partir el codgo php en 2 y en el medio meter el html "SIntaxis alternativa" -->

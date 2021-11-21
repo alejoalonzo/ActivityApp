@@ -35,7 +35,7 @@
         <script src="scrps/scripts.js"></script>
         <script src="scrps/sweetalert2.all.min.js"></script>
     </head>
-    <body>
+    <body id= "loginBody">
         <div class="container">
             <div class="row justify-content-center cen pt-5 mt-5">
                 <!-- LOGIN ------------------------------------------------------------------------------------------------------>
@@ -77,6 +77,9 @@
                     ?>
                 </div> 
             </div>
-        </div>    
+        </div> 
+        <script>
+            cambiarFondoLogin();
+        </script>    
     </body>
 </html>

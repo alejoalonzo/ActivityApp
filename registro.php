@@ -9,8 +9,6 @@
                             $_POST['name']);
     }
 
-    
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -29,7 +27,9 @@
         <script src="scrps/scripts.js"></script>
         <script src="scrps/sweetalert2.all.min.js"></script>
     </head>
-    <body>
+    <body id="registroBody">
+        
+        
         <div class="container">
             <div class="row justify-content-center cen pt-5 mt-5">
                 <!-- LOGIN ------------------------------------------------------------------------------------------------------>
@@ -62,6 +62,9 @@
                     </form>
                 </div> 
             </div>
-        </div>    
+        </div>
+        <script>
+            cambiarFondoRegistro();
+        </script>    
     </body>
 </html>
