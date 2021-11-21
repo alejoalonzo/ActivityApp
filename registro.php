@@ -1,12 +1,16 @@
-<?php //require "controladores/conexion.php";?>
+<?php  require "controladores/controladorUsuarios.php";?>
 <?php
-    //session_start();
-    if(isset($_COOKIE["ifpUser"])){
-        $_SESSION["usuario"] = $_COOKIE["ifpUser"];
-        //prueba-->echo "Entro en el if de la cookie";
-        header("Location: index.php");
-        exit();
+    session_start();//Siempre iniciar la session
+    if(isset($_POST["registrar"])){//si le da al boton de registrar...
+        //envio estos parametros por POST para crear usuario
+        registrarUsuario($_POST['user'], 
+                            $_POST['password'],
+                            $_POST['email'],
+                            $_POST['name']);
     }
+
+    
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -39,7 +43,7 @@
                             <input type="text" id="registroNombre" class="form-control" name="name" placeholder="Nombre"/>
                         </div>
                         <div class="form-group">
-                            <input type="email" id="registroEmail" class="form-control" name= "email" placeholder="Email"/>
+                            <input type="text" id="registroEmail" class="form-control" name= "email" placeholder="Correo"/>
                         </div>
                         <div class="form-group">
                             <input type="text" id="registroUsuario" class="form-control" name="user" placeholder="Usuario"/>

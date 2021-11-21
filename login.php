@@ -15,7 +15,7 @@
     if(isset($_POST["registro"])){
         header("Location: registro.php");//Y lo mandamos al registro
         exit();
-        echo 'Holaaaaa';
+        //echo 'Entra aqui';
     }    
 ?>
 <!DOCTYPE html>

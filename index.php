@@ -40,7 +40,7 @@
         <div class="col-md-auto">
         </div>
         <div class="col col-lg-12">
-          <h1 class="display-4">Hola, <?php echo  $_SESSION["usuario"]?></h1>
+          <h1 class="display-4">Hola, <?php echo  $_SESSION["usuario"] ?></h1>
         </div>
       </div>
     </div>  

@@ -3,7 +3,7 @@ require "conexion.php";
     function comprobarLogin(){
         //La cookie  guarda los datos aunque se cierre el navegador, solo con el logout se puede salir y la SESSION los guarda en el el server
         if(isset($_COOKIE["ifpUser"]) && !isset($_SESSION["usuario"])){
-            $_SESSION["usuario"] = $_COOKIE["ifpUser"];
+            $_SESSION["usuario"] = obtenerUsuarioPorId($_COOKIE["ifpUser"]);
             //prueba-->echo "Entro en el if de la cookie";
         }
         if(!isset($_SESSION["usuario"])){//si no existe dentro de la session el valor login, que me mande al login
@@ -33,6 +33,27 @@ require "conexion.php";
         }
     }
 
+    function obtenerUsuarioPorId($id){
+
+        global $conexion;
+
+        //Es menos bulnerable obtener los datos con los '?'
+        $consulta = "SELECT id, nombre, correo
+                    FROM usuarios
+                    WHERE id = ?
+                    ";
+        //Este codigo traduce la consulta a 
+        $stmt = $conexion->prepare($consulta);
+        $stmt->bind_param('s', $id);//vinculacion(bind), 'ss' se refiere a un string y otro string
+        $stmt->execute();//ejejucar
+        $resultado = $stmt->get_result();//obtener resultado
+
+        if($resultado){//arreglo asociativo
+            $usuario_db = mysqli_fetch_assoc($resultado);
+            return $usuario_db;
+        }
+    }
+
     function hacerLogin(){
         //Si el usuario y contraseña es correcto, la sseion del index va a tener un valor y si no lo va a mandar al login
         $nombreUsuario = $_POST["user"];
@@ -44,14 +65,14 @@ require "conexion.php";
         exit();
     }
 
-    // function comprobarRegistro(){
+    function registrarUsuario($id, $contrasena, $correo, $nombre){
+
+        //llamo a una funcion CRUD
+        $registrar =  crearUsuarios($id, $contrasena, $correo, $nombre);
         
-    //     if(isset($_COOKIE["ifpUser"])){
-    //         $_SESSION["usuario"] = $_COOKIE["ifpUser"];
-    //         //prueba-->echo "Entro en el if de la cookie";
-    //         header("Location: index.php");
-    //         exit();
-    //     }
-    // }
+        //Para que no me lo envie a 'login' y se quede en 'index' al registrar
+        $obtenerUser = obtenerUsuario($id, $contrasena);
+        hacerLogin();
+    }
 
 ?>
