@@ -1,7 +1,7 @@
 <?php
-//***********************************************************CRUD**************************************** */
+//***********************************************************CRUD**************************************** ********************************/
 
-//Ejemplo para insertar (CREATE)----------------------------------------------------------------------------
+//Ejemplo para insertar (CREATE)-------------------------------------------------------------------------------------------------------------
     function crearUsuarios ($id, $contrasena, $correo, $nombre){//Debe corresponder con los campos de la BBDD
         global $conexion;
         $consulta = "INSERT INTO usuarios (id, contrasena, correo, nombre)
@@ -15,8 +15,21 @@
         }
 
     }
+    function crearActividadEnDB ($titulo, $ciudad, $fecha, $precio, $usuario){//Debe corresponder con los campos de la BBDD
+        global $conexion;
+        $consulta = "INSERT INTO actividades (titulo, ciudad, fecha, precio, usuario)
+                    VALUES ('$titulo','$ciudad','$fecha','$precio', '$usuario')";
+        $resultado = mysqli_query($conexion, $consulta);
+        if($resultado){
+            return true;
+        }else{
+            echo $conexion->error;
+            return false;
+        }
 
-    //Ejemplo para realizar una consulta (READ)-------------------------------------------------------------
+    }
+
+    //Ejemplo para realizar una consulta (READ)---------------------------------------------------------------------------------------
     function listarUsuarios(){
         global $conexion;
         $consulta = "SELECT * FROM usuarios";
@@ -41,7 +54,8 @@
         }
     }
 
-    //Ejemplo para actializar (UPDATE)----------------------------------------------------------------------------
+
+    //Ejemplo para actializar (UPDATE)--------------------------------------------------------------------------------------------
     function actualizarUsuarios($id, $contrasena, $correo, $nombre){//Debe corresponder con los campos de la BBDD
         global $conexion;
         $consulta = "UPDATE usuarios
@@ -60,7 +74,7 @@
 
     }
 
-      //Ejemplo para borrar (DELETE)----------------------------------------------------------------------------
+      //Ejemplo para borrar (DELETE)-------------------------------------------------------------------------------------------------------------
     function borrarUsuarios($id){//Solo necesito el id
         global $conexion;
         $consulta = "DELETE FROM usuarios

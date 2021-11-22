@@ -14,10 +14,14 @@ CREATE TABLE ifpdb.usuarios (id  VARCHAR(50) NOT NULL ,
                                 nombre     VARCHAR(255) NOT NULL ,
                                 PRIMARY KEY  (id)) ENGINE = InnoDB;
 
-CREATE TABLE ifpdb.acrividades ( id INT NOT NULL AUTO_INCREMENT ,  
+CREATE TABLE ifpdb.actividades ( id INT NOT NULL AUTO_INCREMENT ,  
                                         titulo  VARCHAR(200) NOT NULL , 
                                         ciudad  VARCHAR(100) NOT NULL , 
                                         fecha   DATE NOT NULL ,  
                                         precio  BIT NOT NULL ,
                                         usuario VARCHAR(50) NOT NULL ,    
                                         PRIMARY KEY  (id)) ENGINE = InnoDB;
+
+ALTER TABLE actividades ADD INDEX(usuario);
+
+-- relacionar las tablas desde phpMyAdmin/Diseñador/Creacion de relacion. (Update = casdade/ Delete = restrict).

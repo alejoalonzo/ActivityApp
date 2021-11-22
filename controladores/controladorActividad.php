@@ -1,6 +1,7 @@
 
 <?php require "actividad.php";?>
 <?php 
+    //require "functionsCRUD.php";
     function comprobarActividad(){
 
         if (isset($_POST["crearActividad"])){//Lo mismo de antes solo que ahora iremos guardando las act en el objeto nuevaActividad
@@ -10,9 +11,16 @@
                                             $_POST['tipo']);//mando estos parametros al constructor
                                             
             crearActividades($nuevaActividad);
+
+            //Falta meter el usuarioen la tabla de actividades...************************************************************************************************************************
+            //$iD = obtenerUsuarioPorId();
+            
+            crearActividadEnDB ($nuevaActividad->titulo, $nuevaActividad->ciudad, $nuevaActividad->fecha, 1, "ale");
+
         };
     }
 
+    
     function crearActividades($nuevaActividad){//mme mandan la actiidad y aqui la creo
         if(!isset($_SESSION["actividades"])){//si no existe dentro de la session el valor actividaddes, que lo cree
             $_SESSION["actividades"] = array();
