@@ -5,7 +5,6 @@ require "conexion.php";
         if(isset($_COOKIE["ifpUser"]) && !isset($_SESSION["usuario"])){
             $_SESSION["usuario"] = obtenerUsuarioPorId($_COOKIE["ifpUser"]);
             //prueba-->echo "Entro en el if de la cookie";
-            
         }
         if(!isset($_SESSION["usuario"])){//si no existe dentro de la session el valor login, que me mande al login
             header("Location: login.php");
@@ -62,19 +61,25 @@ require "conexion.php";
 
         //Asignar cookie, le paso un nombre y el usuario y tambn tiempo (300s) corto para ir probando 
         setcookie("ifpUser", $idUsuario, time()+300);
+        
         header("Location: index.php");//Y lo mandamos al index
         exit();
     }
 
     function registrarUsuario($id, $contrasena, $correo, $nombre){
 
-        //llamo a una funcion CRUD
+        //llamo a una funcion CRUD pra crear en db
         $registrar =  crearUsuarios($id, $contrasena, $correo, $nombre);
         
-        //Para que no me lo envie a 'login' y se quede en 'index' al registrar
-        $obtenerUser = obtenerUsuario($id, $contrasena);
-        $iDE = $obtenerUser ["usuario"]["id"];
-        hacerLogin($iDE);
+        //Hago todos los pasos del login para que no se vaya a login y se quede en index
+        setcookie("ifpUser", $id, time()+300);
+        if(isset($_COOKIE["ifpUser"]) && !isset($_SESSION["usuario"])){
+            $_SESSION["usuario"] = obtenerUsuarioPorId($_COOKIE["ifpUser"]);
+           
+        }
+        
+        header("Location: index.php");//Y lo mandamos al index
+        exit();
     }
 
 ?>
