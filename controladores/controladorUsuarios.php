@@ -70,16 +70,19 @@ require "conexion.php";
 
         //llamo a una funcion CRUD pra crear en db
         $registrar =  crearUsuarios($id, $contrasena, $correo, $nombre);
+        if(isset($registrar)){
+            $registroOkAlert="";
+        }
         
         //Hago todos los pasos del login para que no se vaya a login y se quede en index
         setcookie("ifpUser", $id, time()+300);
         if(isset($_COOKIE["ifpUser"]) && !isset($_SESSION["usuario"])){
             $_SESSION["usuario"] = obtenerUsuarioPorId($_COOKIE["ifpUser"]);
-           
         }
         
         header("Location: index.php");//Y lo mandamos al index
         exit();
+
     }
 
 ?>

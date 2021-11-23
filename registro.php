@@ -7,9 +7,11 @@
                             $_POST['password'],
                             $_POST['email'],
                             $_POST['name']);
+                            
     }
-
+    
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -63,8 +65,16 @@
                 </div> 
             </div>
         </div>
+        
         <script>
             cambiarFondoRegistro();
-        </script>    
+        </script> 
+        <?php
+            if(isset($registroOkAlert)){
+                echo "<script>";
+                echo "registroCorrecto();";
+                echo "</script>";
+            }  
+        ?>
     </body>
 </html>

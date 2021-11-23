@@ -117,13 +117,16 @@
               />
               <?php
               //Otro condicional para mostrar llamar al JS que muestra la el div contenedor.
-              if(isset($_POST['crearActividad']) && $_POST['tipo']!=""){ 
-                //Las fuciones de JS se pueden llamar asi
-                echo "<script>";
-                echo "mostrarActividad();";
-                echo "</script>";
-              }
+                if(isset($_POST['crearActividad']) && $_POST['tipo']!=""){ 
+                  //Las fuciones de JS se pueden llamar asi
+                  echo "<script>";
+                  echo "mostrarActividad();";
+                  echo "</script>";
+                } 
               ?>
+              
+            
+        
             </div>
           </form>
         </div> 

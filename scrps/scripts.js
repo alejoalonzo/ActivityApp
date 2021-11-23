@@ -26,6 +26,16 @@ function cambiarFondoLogin() {
   document.getElementById("loginBody").style.backgroundImage =
     "url(./img/registroBG.jpg)";
 }
+function registroCorrecto() {
+  Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Registrado correctamente",
+    showConfirmButton: false,
+    timer: 1500,
+  });
+}
+
 //********************* NOTAS ************************************************** */
 
 // <!-- VERSION ALTERNATIVA. partir el codgo php en 2 y en el medio meter el html "SIntaxis alternativa" -->
