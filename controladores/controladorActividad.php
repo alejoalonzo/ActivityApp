@@ -12,13 +12,16 @@
                                             
             crearActividades($nuevaActividad);
 
-            //Falta meter el usuarioen la tabla de actividades...************************************************************************************************************************
-            //$iD = obtenerUsuarioPorId();
-            
-            crearActividadEnDB ($nuevaActividad->titulo, $nuevaActividad->ciudad, $nuevaActividad->fecha, 1, "ale");
 
+            //obtengo el usuario asi para mandarlo en el ultimo campo de la tabla actividad que ya esta relacionada
+            if(isset($_COOKIE["ifpUser"]) && !isset($_SESSION["usuario"])){
+                $_SESSION["usuario"] = obtenerUsuarioPorId($_COOKIE["ifpUser"]);
+            }
+            
+            crearActividadEnDB ($nuevaActividad->titulo, $nuevaActividad->ciudad, $nuevaActividad->fecha, 1, $_SESSION["usuario"]["id"]);
         };
     }
+
 
     
     function crearActividades($nuevaActividad){//mme mandan la actiidad y aqui la creo

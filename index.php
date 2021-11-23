@@ -40,7 +40,7 @@
         <div class="col-md-auto">
         </div>
         <div class="col col-lg-12">
-          <h1 class="display-4">Hola, <?php echo  $_SESSION["usuario"] ?></h1>
+          <h1 class="display-4">Hola, <?php echo  $_SESSION["usuario"]["nombre"] ?></h1>
         </div>
       </div>
     </div>  
@@ -71,6 +71,7 @@
                     <?php echo "<b>Que --> </b>" . $actividad->titulo."<br>"?>
                     <?php echo "<b>Cuando --> </b>" . $actividad->fecha."<br>"?>
                     <?php echo "<b>Donde --> </b>" . $actividad->ciudad."<br>"?>
+                    <?php echo "<b>Creada por --> </b>" . $_SESSION["usuario"]["nombre"] ."<br>"?>
                     <?php echo  "<br><br>"?>
                 </div>
               <?php endforeach; ?>

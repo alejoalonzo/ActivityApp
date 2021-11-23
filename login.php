@@ -7,7 +7,7 @@
         $obtenerUser = obtenerUsuario($_POST["user"], $_POST["password"]);
 
         if($obtenerUser){
-            hacerLogin();
+            hacerLogin($obtenerUser);
         }else{
             $errorLogin= "";
         }

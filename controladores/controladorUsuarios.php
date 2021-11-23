@@ -5,6 +5,7 @@ require "conexion.php";
         if(isset($_COOKIE["ifpUser"]) && !isset($_SESSION["usuario"])){
             $_SESSION["usuario"] = obtenerUsuarioPorId($_COOKIE["ifpUser"]);
             //prueba-->echo "Entro en el if de la cookie";
+            
         }
         if(!isset($_SESSION["usuario"])){//si no existe dentro de la session el valor login, que me mande al login
             header("Location: login.php");
@@ -12,18 +13,18 @@ require "conexion.php";
         }
     }
 
-    function obtenerUsuario($nombreUsuario, $contrasenaUsuario){
+    function obtenerUsuario($idUsuario, $contrasenaUsuario){
 
         global $conexion;
 
         //Es menos bulnerable obtener los datos con los '?'
         $consulta = "SELECT id, nombre, correo
                     FROM usuarios
-                    WHERE nombre = ? AND contrasena =?
+                    WHERE id = ? AND contrasena =?
                     ";
         //Este codigo traduce la consulta a 
         $stmt = $conexion->prepare($consulta);
-        $stmt->bind_param('ss', $nombreUsuario, $contrasenaUsuario);//vinculacion(bind), 'ss' se refiere a un string y otro string
+        $stmt->bind_param('ss', $idUsuario, $contrasenaUsuario);//vinculacion(bind), 'ss' se refiere a un string y otro string
         $stmt->execute();//ejejucar
         $resultado = $stmt->get_result();//obtener resultado
 
@@ -54,13 +55,13 @@ require "conexion.php";
         }
     }
 
-    function hacerLogin(){
+    function hacerLogin($usuario){
         //Si el usuario y contraseña es correcto, la sseion del index va a tener un valor y si no lo va a mandar al login
-        $nombreUsuario = $_POST["user"];
-        $_SESSION["usuario"] = $nombreUsuario;
+        $idUsuario = $usuario["id"];
+        $_SESSION["usuario"] = $usuario;
 
         //Asignar cookie, le paso un nombre y el usuario y tambn tiempo (300s) corto para ir probando 
-        setcookie("ifpUser", $nombreUsuario, time()+300);
+        setcookie("ifpUser", $idUsuario, time()+300);
         header("Location: index.php");//Y lo mandamos al index
         exit();
     }
@@ -72,7 +73,8 @@ require "conexion.php";
         
         //Para que no me lo envie a 'login' y se quede en 'index' al registrar
         $obtenerUser = obtenerUsuario($id, $contrasena);
-        hacerLogin();
+        $iDE = $obtenerUser ["usuario"]["id"];
+        hacerLogin($iDE);
     }
 
 ?>
